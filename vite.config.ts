@@ -5,5 +5,33 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import type { Plugin } from "vite";
 
-export default defineConfig();
+function clientEntryDevFallback(): Plugin {
+  return {
+    name: "gharpayy:client-entry-dev-fallback",
+    configureServer(server) {
+      server.middlewares.use((request, response, next) => {
+        if (!request.url?.startsWith("/@id/virtual:tanstack-start-client-entry")) {
+          next();
+          return;
+        }
+
+        response.statusCode = 200;
+        response.setHeader("Content-Type", "application/javascript");
+        response.end('import "/src/client.tsx";');
+      });
+    },
+  };
+}
+
+export default defineConfig({
+  tanstackStart: {
+    client: {
+      entry: "src/client.tsx",
+    },
+  },
+  vite: {
+    plugins: [clientEntryDevFallback()],
+  },
+});

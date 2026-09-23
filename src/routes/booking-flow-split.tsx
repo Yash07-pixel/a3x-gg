@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ClientOnly } from "@/components/ClientOnly";
 import { SplitFlow } from "@/bf100x/SplitFlow";
+import { AssignmentTourModule } from "@/components/assignment/AssignmentWorkflow";
 
 export const Route = createFileRoute("/booking-flow-split")({
   head: () => ({
@@ -18,8 +19,13 @@ export const Route = createFileRoute("/booking-flow-split")({
 
 function SplitPage() {
   return (
-    <ClientOnly fallback={<p className="p-6 text-center text-sm text-muted-foreground">Loading the split screen…</p>}>
-      <SplitFlow />
-    </ClientOnly>
+    <div className="min-h-screen bg-background">
+      <div className="border-b bg-muted/20 p-2">
+        <AssignmentTourModule />
+      </div>
+      <ClientOnly fallback={<p className="p-6 text-center text-sm text-muted-foreground">Loading the split screen…</p>}>
+        <SplitFlow embedded />
+      </ClientOnly>
+    </div>
   );
 }

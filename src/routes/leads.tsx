@@ -20,6 +20,7 @@ import { useMountedNow } from "@/hooks/use-now";
 import {
   LeadStackQueue, LeadFocusStack, LeadStageBoard, LeadMoveInBuckets, type LeadViewMode,
 } from "@/components/leads/LeadViews";
+import { AssignmentCallModule } from "@/components/assignment/AssignmentWorkflow";
 
 export const Route = createFileRoute("/leads")({
   head: () => ({
@@ -147,6 +148,8 @@ function LeadsPage() {
             </Button>
           </div>
         </header>
+
+        <AssignmentCallModule />
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="border rounded-lg p-4 bg-white shadow-sm">

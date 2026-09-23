@@ -4,6 +4,7 @@ import { ClientOnly } from "@/components/ClientOnly";
 import { ClosingBoard } from "@/components/commitments/ClosingBoard";
 import { HowButton } from "@/components/common/HowButton";
 import { RoleGuaranteePanel } from "@/components/workflow/RoleGuaranteePanel";
+import { AssignmentClosingModule } from "@/components/assignment/AssignmentWorkflow";
 
 export const Route = createFileRoute("/closing")({
   head: () => ({
@@ -47,6 +48,8 @@ function ClosingPage() {
         </header>
 
         <RoleGuaranteePanel role="closing" />
+
+        <AssignmentClosingModule />
 
         <ClientOnly fallback={<p className="py-10 text-center text-sm text-muted-foreground">Loading closing mission…</p>}>
           <ClosingBoard />
